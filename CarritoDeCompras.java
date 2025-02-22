@@ -33,7 +33,7 @@ public class CarritoDeCompras {
                     int cantidad = scanner.nextInt();
                     System.out.print("Ingresa el precio del producto: ");
                     double precio = scanner.nextDouble();
-                    // Agregar 
+                  
                     productos.add(producto);
                     cantidades.add(cantidad);
                     precios.add(precio);
@@ -41,7 +41,7 @@ public class CarritoDeCompras {
                     break;
 
                 case 2:
-                    // Eliminar
+                 
                     System.out.print("Ingresa el nombre del producto a eliminar: ");
                     String productoEliminar = scanner.nextLine();
                     int indexEliminar = productos.indexOf(productoEliminar);
@@ -77,7 +77,7 @@ public class CarritoDeCompras {
                    
                     System.out.print("Ingresa el porcentaje de descuento (por ejemplo, 10 para 10%): ");
                     double descuento = scanner.nextDouble();
-                    // Aplicar descuento 
+                  
                     for (int i = 0; i < precios.size(); i++) {
                         double precioOriginal = precios.get(i);
                         double precioConDescuento = precioOriginal * (1 - descuento / 100);
@@ -87,7 +87,7 @@ public class CarritoDeCompras {
                     break;
 
                 case 5:
-                    // Generar ticket
+                   
                     double total = 0;
                     System.out.println("\n--- TICKET ---");
                     for (int i = 0; i < productos.size(); i++) {
@@ -102,7 +102,7 @@ public class CarritoDeCompras {
                     break;
 
                 case 6:
-                    // Salir
+               
                     System.out.println("¡Gracias por usar el carrito de compras!");
                     scanner.close();
                     return;
