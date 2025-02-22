@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CarritoDeCompras {
-// Jair Sinisterra, Daisy Malagon, Cristina Samboni
+    // Jair Sinisterra, Daisy Malagon, Cristina Samboni
     /**
      * @param args
      */
@@ -14,14 +14,13 @@ public class CarritoDeCompras {
         ArrayList<Double> precios = new ArrayList<>();
 
         while (true) {
-            
-            System.out.println("\n--- MENÚ ---");
+            System.out.println("*** Bienvenido al carrito de compras***");
+            System.out.println("\n--- MENU ---");
             System.out.println("1. Insertar producto");
             System.out.println("2. Eliminar producto");
-            System.out.println("3. Actualizar producto");
-            System.out.println("4. Aplicar descuento");
-            System.out.println("5. Generar ticket");
-            System.out.println("6. Salir");
+            System.out.println("3. Aplicar descuento");
+            System.out.println("4. Finalizar Compra y generar ticket");
+            System.out.println("5. Salir");
             System.out.print("Elige una opción: ");
             
             int opcion = scanner.nextInt();
@@ -34,6 +33,13 @@ public class CarritoDeCompras {
                     String producto = scanner.nextLine();
                     System.out.print("Ingresa la cantidad: ");
                     int cantidad = scanner.nextInt();
+                    if(cantidad <1){
+                        System.out.println("Ingrese una cantidad valida");
+                        break;
+                    }else{
+                        System.out.println("Cantidad Valida");
+                    }
+                    
                     System.out.print("Ingresa el precio del producto: ");
                     double precio = scanner.nextDouble();
                   
@@ -58,39 +64,37 @@ public class CarritoDeCompras {
                     }
                     break;
 
-                case 3:
-                  
-                    System.out.print("Ingresa el nombre del producto a actualizar: ");
-                    String productoActualizar = scanner.nextLine();
-                    int indexActualizar = productos.indexOf(productoActualizar);
-                    if (indexActualizar != -1) {
-                        System.out.print("Ingresa la nueva cantidad: ");
-                        int nuevaCantidad = scanner.nextInt();
-                        System.out.print("Ingresa el nuevo precio: ");
-                        double nuevoPrecio = scanner.nextDouble();
-                        cantidades.set(indexActualizar, nuevaCantidad);
-                        precios.set(indexActualizar, nuevoPrecio);
-                        System.out.println("Producto '" + productoActualizar + "' actualizado.");
-                    } else {
-                        System.out.println("El producto no se encuentra en el carrito.");
-                    }
-                    break;
+                    case 3:
+                        System.out.print("Ingresa el porcentaje de descuento: ");
+                        double descuento = scanner.nextDouble();
+                        boolean descuentoAplicado = false;
 
-                case 4:
-                   
-                    System.out.print("Ingresa el porcentaje de descuento (por ejemplo, 10 para 10%): ");
-                    double descuento = scanner.nextDouble();
-                  
-                    for (int i = 0; i < precios.size(); i++) {
-                        double precioOriginal = precios.get(i);
-                        double precioConDescuento = precioOriginal * (1 - descuento / 100);
-                        precios.set(i, precioConDescuento);
-                    }
-                    System.out.println("Descuento del " + descuento + "% aplicado a todos los productos.");
-                    break;
+                    // Aplicar descuento a todos los productos
+                        for (int i = 0; i < precios.size(); i++) {
+                            if (cantidades.get(i) > 10) {
+                                double precioOriginal = precios.get(i);
+                                double precioConDescuento = precioOriginal * (1 - descuento / 100);
+                                precios.set(i, precioConDescuento);
+                                System.out.println("Descuento aplicado a '" + productos.get(i) + "' por ser mayor a 10 unidades.");
+                                descuentoAplicado = true;
+                            }
+                        }
 
-                case 5:
-                   
+                        if (!descuentoAplicado){
+                             System.out.println("No se aplico descuento a ningun producto.");
+                        }
+                        break;
+
+                    case 4:
+                    System.out.println();
+                    System.out.println("Desea eliminar un producto? \n 1. yes \n 2. no");
+                    int eliminar = scanner.nextInt();
+                    if(eliminar == 1){
+                      System.out.println("Regresando al menu..");
+                      break;
+                    }else{
+                        System.out.println();
+                    }
                     double total = 0;
                     System.out.println("\n--- TICKET ---");
                     for (int i = 0; i < productos.size(); i++) {
@@ -102,15 +106,16 @@ public class CarritoDeCompras {
                         System.out.println(prod + " | Cantidad: " + cant + " | Precio: $" + precioFinal + " | Subtotal: $" + subtotal);
                     }
                     System.out.println("Total a pagar: $" + total);
+                   
                     break;
 
-                case 6:
+                    case 5:
                
                     System.out.println("¡Gracias por usar el carrito de compras!");
                     scanner.close();
                     return;
 
-                default:
+                    default:
                     System.out.println("Opción inválida. Intenta de nuevo.");
                     
             }
