@@ -3,6 +3,9 @@ import java.util.Scanner;
 
 public class CarritoDeCompras {
 // Jair Sinisterra, Daisy Malagon, Cristina Samboni
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -111,6 +114,6 @@ public class CarritoDeCompras {
                     System.out.println("Opción inválida. Intenta de nuevo.");
                     
             }
-        }
-    }
+ }
+}
 }
